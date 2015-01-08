@@ -1,0 +1,4 @@
+hosts
+roles/nginx/files/docker-registry.crt
+roles/nginx/files/docker-registry.htpasswd
+roles/nginx/files/docker-registry.pem

@@ -1,0 +1,10 @@
+---
+- name: "Install Nginx and a private Docker registry."
+  hosts: registry-host
+  user: ubuntu
+  sudo: yes
+
+  roles:
+    - nginx
+    - docker
+    - docker-registry

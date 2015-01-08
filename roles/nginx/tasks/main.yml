@@ -1,0 +1,30 @@
+---
+- name: Install nginx
+  apt: pkg=nginx state=latest update_cache=yes
+  notify:
+    - restart nginx
+
+- name: Upload include/partial file for nginx.conf
+  copy: src=docker-registry.partial dest=/etc/nginx/docker-registry.partial mode=0644
+  notify:
+    - restart nginx
+
+- name: Upload default .htpasswd file
+  copy: src=docker-registry.htpasswd dest=/etc/nginx/docker-registry.htpasswd mode=0644
+  notify:
+    - restart nginx
+
+- name: Upload vhost configuration file
+  template: src=docker-registry.j2 dest=/etc/nginx/sites-enabled/default mode=0644
+  notify:
+    - restart nginx
+
+- name: Upload SSL certificate bundle
+  copy: src=docker-registry.crt dest=/etc/ssl/certs/docker-registry.crt mode=0644
+  notify:
+    - restart nginx
+
+- name: Upload SSL private key
+  copy: src=docker-registry.pem dest=/etc/ssl/private/docker-registry.pem mode=0644
+  notify:
+    - restart nginx

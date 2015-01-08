@@ -1,0 +1,11 @@
+---
+- name: run registry container
+  docker:
+    image: google/docker-registry
+    env: "GCS_BUCKET={{ gcs_bucket_name }}"
+    name: docker-registry
+    ports: "5000:5000"
+    # uncomment the next 2 lines once ansible 1.9 is released
+    # restart_policy: on-failure
+    # restart_policy_retry: 5
+    state: running
